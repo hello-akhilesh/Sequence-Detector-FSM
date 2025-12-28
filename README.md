@@ -105,9 +105,5 @@ gtkwave sequence_detector.vcd
 - Icarus Verilog
 
 - GTKWave
----
-📌 Author
 
-Akhilesh Yadav   
-B.Tech ECE   
-FSM | Verilog | Digital Design
+
