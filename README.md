@@ -1,2 +1,125 @@
-# Sequence-Detector-FSM
-This project implements a Sequence Detector using a Finite State Machine (FSM) in Verilog HDL
+
+# 🔢 Sequence Detector using FSM 
+📌 Project Overview
+
+This project implements a Sequence Detector using a Finite State Machine (FSM) in Verilog HDL.
+The detector monitors a serial input bit stream and asserts an output when a specified bit pattern is detected.
+---
+🔹 FSM Type
+
+- Moore FSM
+
+- Output depends on the current state
+
+🔹 Supported Patterns
+
+- 1011
+
+🔹 Detection Modes
+
+- Non-overlapping
+
+- After a pattern is detected, FSM restarts detection from the next bit
+
+- Overlapping
+
+- After detection, FSM may reuse previous bits for next detection
+
+🔹 Inputs & Outputs
+- Signal	Description
+- clk	Clock signal
+- reset	Asynchronous reset
+- in_bit	Serial input bit (0 or 1)
+- detected	Output = 1 when pattern is detected
+🧠 FSM Design
+🔹 Target Pattern
+- 1011
+
+🔹 FSM States (Moore FSM)
+* State	Meaning
+- S0	No match yet
+- S1	Detected 1
+- S2	Detected 10
+- S3	Detected 101
+- S4	Detected 1011 → Output = 1
+🔹 State Transition Concept
+S0 --1--> S1 --0--> S2 --1--> S3 --1--> DETECT
+
+🔹 After Detection
+
+- Non-overlapping: Return to S0
+
+- Overlapping: Transition to a valid partial-match state (S1 or S2)
+
+- The provided implementation demonstrates the overlapping version.
+---
+📁 Project Structure    
+Sequence_Detector/    
+│    
+├── sequence_detector.v      
+├── tb_sequence_detector.v   
+├── waveform.png             
+├── state_diagram.png        
+└── README.md                
+---
+🧾 Verilog Implementation
+📄 sequence_detector.v
+
+- Moore FSM implementation
+
+- State register and next-state logic
+
+- Overlapping detection logic
+
+- Output asserted when pattern 1011 is completed
+
+✔ Synthesizable RTL
+✔ Clear state encoding
+✔ Easy to extend for non-overlapping mode
+
+🧪 Testbench
+📄 tb_sequence_detector.v
+
+- Generates clock and reset
+
+- Applies serial bit stream
+
+- Dumps waveform for verification
+
+- Example tested sequence includes overlapping occurrences of 1011.
+
+▶️ Compile & Run (Icarus Verilog)
+
+- Open terminal inside the project folder:
+
+iverilog -g2012 sequence_detector.v tb_sequence_detector.v
+vvp a.out
+gtkwave sequence_detector.vcd
+
+---
+✅ Key Features
+
+Moore FSM–based sequence detection
+
+Supports overlapping detection
+
+Clean and synthesizable Verilog RTL
+
+Testbench-driven verification
+
+GTKWave waveform proof
+---
+
+🛠 Tools Used
+
+- Verilog HDL
+
+- Icarus Verilog
+
+- GTKWave
+---
+📌 Author
+
+Akhilesh     
+B.Tech ECE   
+FSM | Verilog | Digital Design
