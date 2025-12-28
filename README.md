@@ -11,51 +11,42 @@ The detector monitors a serial input bit stream and asserts an output when a spe
 
 - Output depends on the current state
 
-🔹 Supported Patterns
+🔹 Detected Pattern
 
 - 1011
 
 🔹 Detection Modes
 
-- Non-overlapping
+- Overlapping: After detection, FSM may reuse previous bits for next detection
 
-- After a pattern is detected, FSM restarts detection from the next bit
-
-- Overlapping
-
-- After detection, FSM may reuse previous bits for next detection
+  
 
 🔹 Inputs & Outputs
-- Signal	Description
-- clk	Clock signal
-- reset	Asynchronous reset
-- in_bit	Serial input bit (0 or 1)
-- detected	Output = 1 when pattern is detected
+| Signal   | Description |
+|----------|-------------|
+| `clk`    | Clock signal |
+| `reset`  | Asynchronous reset |
+| `in_bit` | Serial input bit (`0` or `1`) |
+| `detected` | Goes HIGH when pattern 1011 is detected |
+
 🧠 FSM Design
 🔹 Target Pattern
 - 1011
 
 🔹 FSM States (Moore FSM)
-* State	Meaning
-- S0	No match yet
-- S1	Detected 1
-- S2	Detected 10
-- S3	Detected 101
-- S4	Detected 1011 → Output = 1
-🔹 State Transition Concept
-S0 --1--> S1 --0--> S2 --1--> S3 --1--> DETECT
+| State | Meaning |
+|-------|---------|
+| `S0` | No match yet |
+| `S1` | Detected `1` |
+| `S2` | Detected `10` |
+| `S3` | Detected `101` |
+| `S4` | Detected `1011` → Output = `1` |
 
-🔹 After Detection
 
-- Non-overlapping: Return to S0
-
-- Overlapping: Transition to a valid partial-match state (S1 or S2)
-
-- The provided implementation demonstrates the overlapping version.
 ---
 📁 Project Structure    
-Sequence_Detector/    
-│    
+Sequence_Detector/  
+│     
 ├── sequence_detector.v      
 ├── tb_sequence_detector.v   
 ├── waveform.png             
@@ -73,11 +64,8 @@ Sequence_Detector/
 
 - Output asserted when pattern 1011 is completed
 
-✔ Synthesizable RTL
-✔ Clear state encoding
-✔ Easy to extend for non-overlapping mode
 
-🧪 Testbench
+🧪 Testbench     
 📄 tb_sequence_detector.v
 
 - Generates clock and reset
@@ -92,22 +80,22 @@ Sequence_Detector/
 
 - Open terminal inside the project folder:
 
-iverilog -g2012 sequence_detector.v tb_sequence_detector.v
-vvp a.out
-gtkwave sequence_detector.vcd
+iverilog -g2012 sequence_detector.v tb_sequence_detector.v     
+vvp a.out    
+gtkwave sequence_detector.vcd   
 
 ---
 ✅ Key Features
 
-Moore FSM–based sequence detection
+- Moore FSM–based sequence detection
 
-Supports overlapping detection
+- Supports overlapping detection
 
-Clean and synthesizable Verilog RTL
+- Clean and synthesizable Verilog RTL
 
-Testbench-driven verification
+- Testbench-driven verification
 
-GTKWave waveform proof
+- GTKWave waveform proof
 ---
 
 🛠 Tools Used
@@ -120,6 +108,6 @@ GTKWave waveform proof
 ---
 📌 Author
 
-Akhilesh     
+Akhilesh Yadav   
 B.Tech ECE   
 FSM | Verilog | Digital Design
