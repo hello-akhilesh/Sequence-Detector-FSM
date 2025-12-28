@@ -53,7 +53,7 @@ Sequence_Detector/
 ├── state_diagram.png        
 └── README.md                
 ---
-🧾 Verilog Implementation
+🧾 Verilog Implementation     
 📄 sequence_detector.v
 
 - Moore FSM implementation
