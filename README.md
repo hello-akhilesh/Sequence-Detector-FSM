@@ -29,7 +29,7 @@ The detector monitors a serial input bit stream and asserts an output when a spe
 | `in_bit` | Serial input bit (`0` or `1`) |
 | `detected` | Goes HIGH when pattern 1011 is detected |
 
-🧠 FSM Design
+🧠 FSM Design    
 🔹 Target Pattern
 - 1011
 
@@ -78,7 +78,7 @@ Sequence_Detector/
 
 ▶️ Compile & Run (Icarus Verilog)
 
-- Open terminal inside the project folder:
+
 
 iverilog -g2012 sequence_detector.v tb_sequence_detector.v     
 vvp a.out    
